@@ -1,0 +1,663 @@
+.track-case-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.track-case-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.logo-icon {
+  color: white;
+  opacity: 0.9;
+}
+
+.track-case-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.track-case-header p {
+  font-size: 1.1rem;
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+}
+
+.search-section {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.search-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.search-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-icon {
+  color: #666;
+  margin-left: 15px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.search-button {
+  padding: 15px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.search-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 15px 20px;
+  background: #fee;
+  color: #c53030;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(197, 48, 48, 0.1);
+}
+
+.case-details {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.case-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.case-title-section h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.tracking-codes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tracking-code, .case-number {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tracking-code .label, .case-number .label {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.tracking-code .code, .case-number .code {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+}
+
+.status-badge.blue { background: rgba(59, 130, 246, 0.2); color: #2563eb; }
+.status-badge.yellow { background: rgba(245, 158, 11, 0.2); color: #d97706; }
+.status-badge.purple { background: rgba(139, 92, 246, 0.2); color: #7c3aed; }
+.status-badge.orange { background: rgba(251, 146, 60, 0.2); color: #ea580c; }
+.status-badge.indigo { background: rgba(99, 102, 241, 0.2); color: #6366f1; }
+.status-badge.green { background: rgba(34, 197, 94, 0.2); color: #16a34a; }
+.status-badge.red { background: rgba(239, 68, 68, 0.2); color: #dc2626; }
+.status-badge.teal { background: rgba(20, 184, 166, 0.2); color: #0d9488; }
+.status-badge.gray { background: rgba(107, 114, 128, 0.2); color: #6b7280; }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.info-card h3 {
+  margin: 0 0 20px 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item .label {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.info-item .value {
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+}
+
+.info-item .item-icon {
+  color: #667eea;
+  margin-right: 8px;
+}
+
+.priority-low { color: #16a34a; }
+.priority-medium { color: #d97706; }
+.priority-high { color: #dc2626; }
+.priority-urgent { color: #7c3aed; }
+
+/* Documents Section */
+.documents-card {
+  grid-column: 1 / -1;
+}
+
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.document-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.document-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.document-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.document-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.document-icon {
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.document-name {
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+}
+
+.confidential-badge {
+  background: #dc2626;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.download-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.download-button:hover {
+  background: #5a67d8;
+  transform: scale(1.05);
+}
+
+.download-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.download-loading {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.document-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 24px;
+}
+
+.document-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.document-format {
+  background: #667eea;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.document-size {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.document-uploader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.uploader-label {
+  color: #64748b;
+}
+
+.uploader-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.uploader-bar {
+  color: #667eea;
+  font-size: 0.8rem;
+}
+
+.document-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.no-documents {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #e2e8f0;
+}
+
+/* Hearings Section */
+.hearings-card {
+  grid-column: 1 / -1;
+}
+
+.hearings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hearing-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.hearing-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hearing-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hearing-icon {
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.hearing-title {
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+}
+
+.hearing-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.hearing-status.scheduled {
+  background: #3b82f6;
+  color: white;
+}
+
+.hearing-status.completed {
+  background: #10b981;
+  color: white;
+}
+
+.hearing-status.postponed {
+  background: #f59e0b;
+  color: white;
+}
+
+.hearing-status.cancelled {
+  background: #ef4444;
+  color: white;
+}
+
+.hearing-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 24px;
+}
+
+.hearing-datetime,
+.hearing-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.hearing-description {
+  color: #475569;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* Payments Section */
+.payments-card {
+  grid-column: 1 / -1;
+}
+
+.payments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.payment-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.payment-icon {
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.payment-title {
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+}
+
+.payment-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.payment-status.paid {
+  background: #10b981;
+  color: white;
+}
+
+.payment-status.pending {
+  background: #f59e0b;
+  color: white;
+}
+
+.payment-status.overdue {
+  background: #ef4444;
+  color: white;
+}
+
+.payment-status.partial {
+  background: #8b5cf6;
+  color: white;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 24px;
+}
+
+.payment-amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.amount-value {
+  font-weight: 700;
+  color: #059669;
+  font-size: 1.1rem;
+}
+
+.due-date {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.payment-description {
+  color: #475569;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.no-hearings,
+.no-payments {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #e2e8f0;
+}
+
+.disclaimer {
+  margin: 20px 30px;
+  padding: 15px 20px;
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #92400e;
+  font-size: 0.9rem;
+}
+
+.disclaimer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .track-case-header h1 {
+    font-size: 2rem;
+  }
+  
+  .case-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .search-input-group {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .search-button {
+    width: 100%;
+  }
+  
+  .case-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .info-item .value {
+    text-align: left;
+  }
+}

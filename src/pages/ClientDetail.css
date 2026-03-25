@@ -1,0 +1,153 @@
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #667eea;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  color: #5a67d8;
+}
+
+.client-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.client-avatar-large {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.client-header-info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.client-id {
+  color: #64748b;
+  margin: 0 0 0.75rem 0;
+}
+
+.case-type-badge {
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.case-type-badge.criminal { background: #fef3c7; color: #92400e; }
+.case-type-badge.civil { background: #dbeafe; color: #1e40af; }
+.case-type-badge.family { background: #fce7f3; color: #9d174d; }
+.case-type-badge.property { background: #d1fae5; color: #065f46; }
+
+.client-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.detail-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.detail-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  color: #475569;
+}
+
+.detail-item svg {
+  color: #667eea;
+}
+
+.case-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #475569;
+  transition: background 0.2s;
+}
+
+.case-link:hover {
+  background: #e2e8f0;
+}
+
+.case-link svg {
+  color: #667eea;
+}
+
+.payment-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.payment-summary .label {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0 0 0.25rem 0;
+}
+
+.payment-summary .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10b981;
+  margin: 0;
+}
+
+.payment-summary .value.pending {
+  color: #ef4444;
+}
+
+.no-data {
+  color: #94a3b8;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .client-detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
