@@ -16,7 +16,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
       if (caseId) params.append('caseId', caseId);
       if (clientId) params.append('clientId', clientId);
 
-      const response = await axios.get(`http://localhost:5000/api/documents?${params}`, {
+      const response = await axios.get(`${process.env.VITE_BASE_URL}/api/documents?${params}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -45,7 +45,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
         // Construct full URL for local files
         const fileUrl = response.data.data.url.startsWith('http') 
           ? response.data.data.url 
-          : `http://localhost:5000${response.data.data.url}`;
+          : `${process.env.VITE_BASE_URL}${response.data.data.url}`;
         
         // Open document in new tab
         window.open(fileUrl, '_blank');
@@ -62,7 +62,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
     }
 
     try {
-      const response = await axios.delete(`http://localhost:5000/api/documents/${documentId}`, {
+      const response = await axios.delete(`${process.env.VITE_BASE_URL}/api/documents/${documentId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
