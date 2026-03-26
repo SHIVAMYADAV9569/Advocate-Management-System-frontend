@@ -23,7 +23,7 @@ const TrackCase = () => {
     setSearched(true);
 
     try {
-      const response = await fetch(`/api/tracking/track/${trackingCode}`);
+      const response = await fetch(`http://localhost:5000/api/tracking/track/${trackingCode}`);
       const data = await response.json();
 
       if (data.success) {
@@ -246,8 +246,8 @@ const TrackCase = () => {
               <div className="info-card documents-card">
                 <h3>Uploaded Documents</h3>
                 <div className="documents-list">
-                  {caseData.documents.map((doc) => (
-                    <div key={doc.name || Math.random()} className="document-item">
+                  {caseData.documents.map((doc, index) => (
+                    <div key={doc._id || doc.publicId || `${doc.name}-${index}`} className="document-item">
                       <div className="document-info">
                         <div className="document-header">
                           <FileText size={16} className="document-icon" />

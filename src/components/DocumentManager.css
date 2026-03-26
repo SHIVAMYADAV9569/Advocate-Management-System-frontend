@@ -1,79 +1,270 @@
 .document-manager {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-}
-
-.document-manager::after {
-  content: '';
-  display: block;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #e5e7eb, transparent);
-  margin: 8px 0;
+  gap: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .document-upload-section {
-  flex-shrink: 0;
-  position: relative;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.document-upload-section::after {
-  content: '↓ Documents will appear below after upload';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #6b7280;
-  white-space: nowrap;
-  background: white;
-  padding: 0 8px;
+.document-upload-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .document-list-section {
-  flex: 1;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Responsive layout */
-@media (min-width: 1024px) {
+.document-list-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Upload Form Styling */
+.document-upload h3 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 3px solid #4299e1;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.document-upload label {
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.document-upload input[type="file"] {
+  border: 2px dashed #cbd5e0;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.document-upload input[type="file"]:hover {
+  border-color: #4299e1;
+  background: #ebf8ff;
+}
+
+.document-upload input[type="text"],
+.document-upload textarea,
+.document-upload select {
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.document-upload input[type="text"]:focus,
+.document-upload textarea:focus,
+.document-upload select:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  outline: none;
+}
+
+.document-upload button[type="submit"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.document-upload button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.document-upload button[type="submit"]:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Document List Table */
+.document-list {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.document-list h3 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 3px solid #48bb78;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.document-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.document-list thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.document-list thead th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.document-list tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.document-list tbody tr:hover {
+  background: #f7fafc;
+  transform: scale(1.01);
+}
+
+.document-list tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* New document highlight animation */
+@keyframes highlightPulse {
+  0%, 100% {
+    background: white;
+  }
+  50% {
+    background: #c6f6d5;
+  }
+}
+
+.document-row-new {
+  animation: highlightPulse 2s ease-in-out 3;
+}
+
+/* Document icon styling */
+.document-list .bg-gray-200 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Action buttons */
+.document-list button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.document-list button:first-of-type {
+  background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+  color: white;
+}
+
+.document-list button:first-of-type:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+.document-list button:last-of-type {
+  background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+  color: white;
+}
+
+.document-list button:last-of-type:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(245, 101, 101, 0.3);
+}
+
+/* Confidential badge */
+.document-list .bg-red-100 {
+  background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%) !important;
+  color: #c53030 !important;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
   .document-manager {
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 32px;
-    align-items: start;
+    padding: 1rem;
+    gap: 1rem;
   }
-  
-  .document-upload-section {
-    position: sticky;
-    top: 24px;
-  }
-  
+
+  .document-upload-section,
   .document-list-section {
-    min-width: 0; /* Allow flex item to shrink */
+    padding: 1.5rem;
+  }
+
+  .document-list table {
+    font-size: 0.875rem;
+  }
+
+  .document-list thead th,
+  .document-list tbody td {
+    padding: 0.75rem 0.5rem;
   }
 }
 
-/* Ensure proper spacing in different contexts */
-.document-manager .document-upload {
-  margin-bottom: 0;
+/* Loading state */
+.document-upload button[type="submit"]:disabled {
+  position: relative;
+  color: transparent;
 }
 
-.document-manager .document-list {
-  margin-top: 0;
+.document-upload button[type="submit"]:disabled::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translate(-50%, -50%);
 }
 
-/* Animation for new documents */
-.document-list .document-row-new {
-  animation: highlightNew 2s ease-out;
-}
-
-@keyframes highlightNew {
-  0% {
-    background-color: #dcfce7;
-    transform: scale(1.02);
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
-  100% {
-    background-color: transparent;
-    transform: scale(1);
-  }
+}
+
+/* Empty state */
+.document-list .text-gray-500 {
+  color: #a0aec0;
+  font-style: italic;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 2rem;
 }

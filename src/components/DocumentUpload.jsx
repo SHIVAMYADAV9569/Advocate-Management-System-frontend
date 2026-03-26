@@ -50,10 +50,11 @@ const DocumentUpload = ({ caseId, clientId, onUploadSuccess }) => {
     formData.append('isConfidential', documentInfo.isConfidential);
 
     try {
-      const response = await axios.post('/api/documents/upload', formData, {
+      const token = localStorage.getItem('token');
+      const response = await axios.post('http://localhost:5000/api/documents/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${token}`
         }
       });
 

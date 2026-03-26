@@ -16,7 +16,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
       if (caseId) params.append('caseId', caseId);
       if (clientId) params.append('clientId', clientId);
 
-      const response = await axios.get(`/api/documents?${params}`, {
+      const response = await axios.get(`http://localhost:5000/api/documents?${params}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -62,7 +62,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
     }
 
     try {
-      const response = await axios.delete(`/api/documents/${documentId}`, {
+      const response = await axios.delete(`http://localhost:5000/api/documents/${documentId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -70,7 +70,8 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
 
       if (response.data.success) {
         window.showNotification?.('Document deleted successfully', 'success');
-        fetchDocuments(); // Refresh the list
+        // Refresh the list immediately
+        fetchDocuments();
       }
     } catch (error) {
       window.showNotification?.('Failed to delete document', 'error');
