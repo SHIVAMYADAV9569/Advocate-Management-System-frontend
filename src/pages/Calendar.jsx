@@ -7,7 +7,7 @@ const Calendar = ({ user, onLogout }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState([]);
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = `${process.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     fetchEvents();

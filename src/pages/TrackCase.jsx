@@ -23,7 +23,7 @@ const TrackCase = () => {
     setSearched(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/tracking/track/${trackingCode}`);
+      const response = await fetch(`${process.env.VITE_BASE_URL}/api/tracking/track/${trackingCode}`);
       const data = await response.json();
 
       if (data.success) {
@@ -89,7 +89,7 @@ const TrackCase = () => {
       // Construct full URL for local files
       const fullUrl = documentUrl.startsWith('http') 
         ? documentUrl 
-        : `http://localhost:5000${documentUrl}`;
+        : `${process.env.VITE_BASE_URL}${documentUrl}`;
       
       console.log('Downloading document:', fullUrl);
       

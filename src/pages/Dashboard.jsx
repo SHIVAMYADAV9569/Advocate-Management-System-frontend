@@ -16,7 +16,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = `${process.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     fetchDashboardStats();

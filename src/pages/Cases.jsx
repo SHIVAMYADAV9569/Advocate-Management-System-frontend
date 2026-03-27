@@ -24,7 +24,7 @@ const Cases = ({ user, onLogout }) => {
     fee: { total: 0 }
   });
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = `${process.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     fetchCases();

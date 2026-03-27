@@ -22,7 +22,7 @@ const Payments = ({ user, onLogout }) => {
     status: 'pending'
   });
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = `${process.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     fetchPayments();
