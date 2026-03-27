@@ -27,7 +27,7 @@ const Settings = ({ user, onLogout }) => {
     paymentAlerts: true
   });
 
-  const API_URL = `${process.env.VITE_BASE_URL}/api`;
+  const API_URL = `${import.meta.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     if (user) {

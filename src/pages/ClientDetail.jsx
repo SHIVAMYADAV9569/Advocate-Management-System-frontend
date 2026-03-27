@@ -9,7 +9,7 @@ const ClientDetail = ({ user, onLogout }) => {
   const [client, setClient] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = `${process.env.VITE_BASE_URL}/api`;
+  const API_URL = `${import.meta.env.VITE_BASE_URL}/api`;
 
   useEffect(() => {
     fetchClient();

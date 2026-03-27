@@ -37,9 +37,8 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
         return;
       }
-      
-      console.log('Making request to: ${process.env.VITE_BASE_URL}/api/auth/me');
-      const response = await fetch(`${process.env.VITE_BASE_URL}/api/auth/me`, {
+      console.log(`Making request to: ${import.meta.env.VITE_BASE_URL}/api/auth/me`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -72,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       console.log('Attempting login with email:', email);
-      const response = await fetch('${process.env.VITE_BASE_URL}/api/auth/login', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

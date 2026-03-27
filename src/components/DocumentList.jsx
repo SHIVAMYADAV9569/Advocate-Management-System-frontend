@@ -16,7 +16,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
       if (caseId) params.append('caseId', caseId);
       if (clientId) params.append('clientId', clientId);
 
-      const response = await axios.get(`${process.env.VITE_BASE_URL}/api/documents?${params}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/documents?${params}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -62,7 +62,7 @@ const DocumentList = ({ caseId, clientId, userRole, highlightNew = false }) => {
     }
 
     try {
-      const response = await axios.delete(`${process.env.VITE_BASE_URL}/api/documents/${documentId}`, {
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/documents/${documentId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

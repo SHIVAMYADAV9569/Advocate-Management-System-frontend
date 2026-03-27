@@ -51,7 +51,7 @@ const DocumentUpload = ({ caseId, clientId, onUploadSuccess }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${process.env.VITE_BASE_URL}/api/documents/upload`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/documents/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
