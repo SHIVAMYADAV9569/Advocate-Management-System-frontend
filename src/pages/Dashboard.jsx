@@ -5,7 +5,8 @@ import {
   IndianRupee, 
   Calendar,
   TrendingUp,
-  Clock
+  Clock,
+  Bot
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import Sidebar from '../components/Sidebar';
@@ -64,6 +65,22 @@ const Dashboard = () => {
         <div className="dashboard-header">
           <h1>Dashboard</h1>
           <p className="welcome-text">Welcome back, {user?.name}!</p>
+        </div>
+
+        {/* AI Assistant Quick Access Card */}
+        <div className="ai-assistant-banner" onClick={() => window.location.href = '/ai-assistant'}>
+          <div className="ai-banner-content">
+            <div className="ai-banner-icon">
+              <Bot size={40} />
+            </div>
+            <div className="ai-banner-text">
+              <h2>🤖 AI Legal Assistant</h2>
+              <p>Get instant answers to your legal questions - Supports English & Hindi</p>
+            </div>
+          </div>
+          <button className="ai-banner-btn">
+            Try Now →
+          </button>
         </div>
 
         {/* Stats Cards */}

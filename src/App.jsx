@@ -19,6 +19,7 @@ import Calendar from './pages/Calendar';
 import Settings from './pages/Settings';
 import TrackCase from './pages/TrackCase';
 import StatusManagement from './pages/StatusManagement';
+import AIAssistant from './pages/AIAssistant';
 import Notifications from './components/Notifications';
 import './App.css';
 
@@ -79,23 +80,22 @@ const ProtectedRoutes = () => {
   console.log('ProtectedRoutes - user exists, rendering protected content');
   return (
     <>
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/clients" element={<Clients />} />
-          <Route path="/clients/:id" element={<ClientDetail />} />
-          <Route path="/cases" element={<Cases />} />
-          <Route path="/cases/:id" element={<CaseDetail />} />
-          <Route path="/hearings" element={<Hearings />} />
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/status-management" element={<StatusManagement />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/clients" element={<Clients />} />
+        <Route path="/clients/:id" element={<ClientDetail />} />
+        <Route path="/cases" element={<Cases />} />
+        <Route path="/cases/:id" element={<CaseDetail />} />
+        <Route path="/hearings" element={<Hearings />} />
+        <Route path="/payments" element={<Payments />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/status-management" element={<StatusManagement />} />
+        <Route path="/ai-assistant" element={<AIAssistant />} />
+      </Routes>
     </>
   );
 };

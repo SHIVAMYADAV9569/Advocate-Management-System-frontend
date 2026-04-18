@@ -9,7 +9,8 @@ import {
   LogOut,
   Menu,
   X,
-  Scale
+  Scale,
+  Bot
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth.jsx';
@@ -28,6 +29,7 @@ const Sidebar = ({ user }) => {
     { path: '/hearings', label: 'Hearings', icon: Calendar },
     { path: '/payments', label: 'Payments', icon: CreditCard },
     { path: '/calendar', label: 'Calendar', icon: Calendar },
+    { path: '/ai-assistant', label: 'AI Assistant', icon: Bot },
     { path: '/settings', label: 'Settings', icon: Settings },
   ];
 

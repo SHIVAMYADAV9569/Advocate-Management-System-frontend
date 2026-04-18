@@ -108,6 +108,23 @@
   color: white;
 }
 
+/* Special styling for AI Assistant menu item */
+.nav-item[href="/ai-assistant"] {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border-left: 3px solid #667eea;
+  margin: 0.5rem 0;
+}
+
+.nav-item[href="/ai-assistant"]:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%);
+  transform: translateX(5px);
+}
+
+.nav-item[href="/ai-assistant"].active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
 .sidebar-footer {
   padding: 1rem;
   border-top: 1px solid #334155;
