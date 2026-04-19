@@ -4,6 +4,10 @@
   gap: 1.5rem;
 }
 
+.case-card-wrapper {
+  position: relative;
+}
+
 .case-card {
   display: flex;
   flex-direction: column;
@@ -120,6 +124,34 @@
   font-weight: 600;
   text-transform: capitalize;
   color: #475569;
+}
+
+/* Delete Case Button */
+.btn-delete-case {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #fee2e2;
+  border: none;
+  color: #dc2626;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.btn-delete-case:hover {
+  background: #dc2626;
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-delete-case:active {
+  transform: scale(0.95);
 }
 
 .modal-lg {

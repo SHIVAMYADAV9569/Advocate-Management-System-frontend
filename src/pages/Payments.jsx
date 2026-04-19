@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { IndianRupee, Plus, FileText, Clock, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { IndianRupee, Plus, FileText, Clock, CheckCircle, AlertCircle, X, Trash2 } from 'lucide-react';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import './Payments.css';
 
@@ -142,6 +143,44 @@ const Payments = ({ user, onLogout }) => {
     });
   };
 
+  // Delete payment function - Direct deletion without confirmation
+  const handleDeletePayment = async (paymentId) => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      // Call delete API using Axios
+      const response = await axios.delete(`${API_URL}/payments/${paymentId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        // Remove the deleted payment from UI without reloading
+        setPayments(prevPayments => prevPayments.filter(p => p._id !== paymentId));
+        
+        // Refresh stats
+        fetchStats();
+        
+        // Show success notification
+        if (window.showNotification) {
+          window.showNotification('Payment deleted successfully!', 'success');
+        }
+      }
+    } catch (error) {
+      console.error('Error deleting payment:', error);
+      
+      // Show error message
+      const errorMessage = error.response?.data?.message || 'Failed to delete payment';
+      
+      if (window.showNotification) {
+        window.showNotification(errorMessage, 'error');
+      } else {
+        alert(`Error: ${errorMessage}`);
+      }
+    }
+  };
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'paid': return <CheckCircle size={20} className="text-green-500" />;
@@ -230,6 +269,7 @@ const Payments = ({ user, onLogout }) => {
                 <th>Type</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -245,6 +285,15 @@ const Payments = ({ user, onLogout }) => {
                       {getStatusIcon(payment.status)}
                       <span className="capitalize">{payment.status}</span>
                     </span>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn-delete"
+                      onClick={() => handleDeletePayment(payment._id)}
+                      title="Delete Payment"
+                    >
+                      <Trash2 size={18} />
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -80,6 +80,10 @@
   gap: 1.5rem;
 }
 
+.client-card-wrapper {
+  position: relative;
+}
+
 .client-card {
   display: flex;
   align-items: flex-start;
@@ -171,6 +175,34 @@
   border-radius: 9999px;
   font-size: 0.75rem;
   color: #475569;
+}
+
+/* Delete Client Button */
+.btn-delete-client {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #fee2e2;
+  border: none;
+  color: #dc2626;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.btn-delete-client:hover {
+  background: #dc2626;
+  color: white;
+  transform: scale(1.1);
+}
+
+.btn-delete-client:active {
+  transform: scale(0.95);
 }
 
 .empty-state {

@@ -118,6 +118,30 @@
   text-transform: capitalize;
 }
 
+/* Delete Button Styles */
+.btn-delete {
+  background: #fee2e2;
+  border: none;
+  color: #dc2626;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-delete:active {
+  transform: scale(0.95);
+}
+
 @media (max-width: 768px) {
   .payments-table-container {
     overflow-x: auto;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Search, Briefcase, Calendar, User, Filter } from 'lucide-react';
+import { Plus, Search, Briefcase, Calendar, User, Filter, Trash2 } from 'lucide-react';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import './Cases.css';
 
@@ -152,6 +153,49 @@ const Cases = ({ user, onLogout }) => {
     }
   };
 
+  // Delete case function
+  const handleDeleteCase = async (caseId, caseNumber, caseTitle, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete case ${caseNumber} "${caseTitle}"?\n\nThis action cannot be undone.`
+    );
+
+    if (!isConfirmed) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${API_URL}/cases/${caseId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        // Remove from UI
+        setCases(prevCases => prevCases.filter(c => c._id !== caseId));
+        
+        // Show success notification
+        if (window.showNotification) {
+          window.showNotification('Case deleted successfully!', 'success');
+        } else {
+          alert('Case deleted successfully!');
+        }
+      }
+    } catch (error) {
+      console.error('Error deleting case:', error);
+      const errorMessage = error.response?.data?.message || 'Failed to delete case';
+      
+      // Show error notification
+      if (window.showNotification) {
+        window.showNotification(errorMessage, 'error');
+      } else {
+        alert(`Error: ${errorMessage}`);
+      }
+    }
+  };
+
   const getStatusColor = (status) => {
     const colors = {
       filed: 'bg-blue-100 text-blue-800',
@@ -216,40 +260,49 @@ const Cases = ({ user, onLogout }) => {
 
         <div className="cases-grid">
           {filteredCases.map((c) => (
-            <Link to={`/cases/${c._id}`} key={c._id} className="case-card">
-              <div className="case-header">
-                <div className="case-icon">
-                  <Briefcase size={24} />
+            <div key={c._id} className="case-card-wrapper">
+              <Link to={`/cases/${c._id}`} className="case-card">
+                <div className="case-header">
+                  <div className="case-icon">
+                    <Briefcase size={24} />
+                  </div>
+                  <div className="case-badges">
+                    <span className={`badge ${getStatusColor(c.status)}`}>{c.status}</span>
+                    <span className={`badge ${getPriorityColor(c.priority)}`}>{c.priority}</span>
+                  </div>
+                  <button 
+                    className="update-btn" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleUpdate(c);
+                    }}
+                    title="Update Case"
+                  >
+                    <Filter size={16} />
+                  </button>
                 </div>
-                <div className="case-badges">
-                  <span className={`badge ${getStatusColor(c.status)}`}>{c.status}</span>
-                  <span className={`badge ${getPriorityColor(c.priority)}`}>{c.priority}</span>
+                <div className="case-content">
+                  <h3>{c.title}</h3>
+                  <p className="case-number">{c.caseNumber}</p>
+                  <div className="case-details">
+                    <span><User size={14} /> {c.client?.name || 'Unknown'}</span>
+                    <span><Calendar size={14} /> Filed: {new Date(c.filingDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="case-footer">
+                    <span className="court-name">{c.courtName}</span>
+                    <span className="case-type">{c.caseType}</span>
+                  </div>
                 </div>
-                <button 
-                  className="update-btn" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleUpdate(c);
-                  }}
-                  title="Update Case"
-                >
-                  <Filter size={16} />
-                </button>
-              </div>
-              <div className="case-content">
-                <h3>{c.title}</h3>
-                <p className="case-number">{c.caseNumber}</p>
-                <div className="case-details">
-                  <span><User size={14} /> {c.client?.name || 'Unknown'}</span>
-                  <span><Calendar size={14} /> Filed: {new Date(c.filingDate).toLocaleDateString()}</span>
-                </div>
-                <div className="case-footer">
-                  <span className="court-name">{c.courtName}</span>
-                  <span className="case-type">{c.caseType}</span>
-                </div>
-              </div>
-            </Link>
+              </Link>
+              <button 
+                className="btn-delete-case"
+                onClick={(e) => handleDeleteCase(c._id, c.caseNumber, c.title, e)}
+                title="Delete Case"
+              >
+                <Trash2 size={18} />
+              </button>
+            </div>
           ))}
         </div>
 

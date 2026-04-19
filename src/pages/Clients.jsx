@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Search, Phone, Mail, User, Filter } from 'lucide-react';
+import { Plus, Search, Phone, Mail, User, Filter, Trash2 } from 'lucide-react';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import './Clients.css';
 
@@ -71,6 +72,49 @@ const Clients = ({ user, onLogout }) => {
     }
   };
 
+  // Delete client function
+  const handleDeleteClient = async (clientId, clientName, e) => {
+    e.preventDefault(); // Prevent navigation
+    e.stopPropagation();
+    
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete client "${clientName}"?\n\nNote: Clients with active cases cannot be deleted. Please close or reassign their cases first.`
+    );
+
+    if (!isConfirmed) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${API_URL}/clients/${clientId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        // Remove from UI
+        setClients(prevClients => prevClients.filter(c => c._id !== clientId));
+        
+        // Show success notification
+        if (window.showNotification) {
+          window.showNotification('Client deleted successfully!', 'success');
+        } else {
+          alert('Client deleted successfully!');
+        }
+      }
+    } catch (error) {
+      console.error('Error deleting client:', error);
+      const errorMessage = error.response?.data?.message || 'Failed to delete client';
+      
+      // Show error notification
+      if (window.showNotification) {
+        window.showNotification(errorMessage, 'error');
+      } else {
+        alert(`Error: ${errorMessage}`);
+      }
+    }
+  };
+
   const filteredClients = clients.filter(client =>
     client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     client.phone.includes(searchTerm) ||
@@ -112,23 +156,32 @@ const Clients = ({ user, onLogout }) => {
 
         <div className="clients-grid">
           {filteredClients.map((client) => (
-            <Link to={`/clients/${client._id}`} key={client._id} className="client-card">
-              <div className="client-avatar">
-                <User size={32} />
-              </div>
-              <div className="client-info">
-                <h3>{client.name}</h3>
-                <p className="client-id">{client.clientId}</p>
-                <div className="client-contact">
-                  <span><Phone size={14} /> {client.phone}</span>
-                  {client.email && <span><Mail size={14} /> {client.email}</span>}
+            <div key={client._id} className="client-card-wrapper">
+              <Link to={`/clients/${client._id}`} className="client-card">
+                <div className="client-avatar">
+                  <User size={32} />
                 </div>
-                <div className="client-meta">
-                  <span className={`case-type ${client.caseType}`}>{client.caseType}</span>
-                  <span className="client-cases">{client.totalCases} Cases</span>
+                <div className="client-info">
+                  <h3>{client.name}</h3>
+                  <p className="client-id">{client.clientId}</p>
+                  <div className="client-contact">
+                    <span><Phone size={14} /> {client.phone}</span>
+                    {client.email && <span><Mail size={14} /> {client.email}</span>}
+                  </div>
+                  <div className="client-meta">
+                    <span className={`case-type ${client.caseType}`}>{client.caseType}</span>
+                    <span className="client-cases">{client.totalCases} Cases</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+              <button 
+                className="btn-delete-client"
+                onClick={(e) => handleDeleteClient(client._id, client.name, e)}
+                title="Delete Client"
+              >
+                <Trash2 size={18} />
+              </button>
+            </div>
           ))}
         </div>
 
