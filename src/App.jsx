@@ -19,6 +19,7 @@ import Calendar from './pages/Calendar';
 import Settings from './pages/Settings';
 import TrackCase from './pages/TrackCase';
 import StatusManagement from './pages/StatusManagement';
+import AIAssistant from './pages/AIAssistant';
 import Notifications from './components/Notifications';
 import './App.css';
 
@@ -93,6 +94,7 @@ const ProtectedRoutes = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/status-management" element={<StatusManagement />} />
+        <Route path="/ai-assistant" element={<AIAssistant />} />
       </Routes>
     </>
   );

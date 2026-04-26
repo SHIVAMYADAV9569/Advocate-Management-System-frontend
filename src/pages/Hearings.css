@@ -35,6 +35,10 @@
   gap: 1rem;
 }
 
+.hearing-card-wrapper {
+  position: relative;
+}
+
 .hearing-card {
   display: flex;
   align-items: center;
@@ -43,6 +47,33 @@
   background: white;
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete-hearing {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.hearing-card-wrapper:hover .btn-delete-hearing {
+  opacity: 1;
+}
+
+.btn-delete-hearing:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: scale(1.1);
 }
 
 .hearing-date {
@@ -216,6 +247,7 @@
   .hearing-card {
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 3rem;
   }
 
   .hearing-status {
@@ -225,5 +257,11 @@
 
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .btn-delete-hearing {
+    opacity: 1;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }

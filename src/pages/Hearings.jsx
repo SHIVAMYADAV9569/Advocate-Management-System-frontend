@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Calendar, Clock, MapPin, User, Briefcase, Plus, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, User, Briefcase, Plus, X, Trash2 } from 'lucide-react';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import './Hearings.css';
 
@@ -120,6 +121,49 @@ const Hearings = ({ user, onLogout }) => {
     });
   };
 
+  // Delete hearing function
+  const handleDeleteHearing = async (hearingId, hearingPurpose, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete the hearing "${hearingPurpose}"?\n\nThis action cannot be undone.`
+    );
+
+    if (!isConfirmed) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${API_URL}/hearings/${hearingId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        // Remove from UI
+        setHearings(prevHearings => prevHearings.filter(h => h._id !== hearingId));
+        
+        // Show success notification
+        if (window.showNotification) {
+          window.showNotification('Hearing deleted successfully!', 'success');
+        } else {
+          alert('Hearing deleted successfully!');
+        }
+      }
+    } catch (error) {
+      console.error('Error deleting hearing:', error);
+      const errorMessage = error.response?.data?.message || 'Failed to delete hearing';
+      
+      // Show error notification
+      if (window.showNotification) {
+        window.showNotification(errorMessage, 'error');
+      } else {
+        alert(`Error: ${errorMessage}`);
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="page-container">
@@ -160,23 +204,32 @@ const Hearings = ({ user, onLogout }) => {
 
         <div className="hearings-list">
           {hearings.map((hearing) => (
-            <div key={hearing._id} className="hearing-card">
-              <div className="hearing-date">
-                <span className="day">{new Date(hearing.hearingDate).getDate()}</span>
-                <span className="month">{new Date(hearing.hearingDate).toLocaleString('default', { month: 'short' })}</span>
-              </div>
-              <div className="hearing-content">
-                <h3>{hearing.purpose}</h3>
-                <div className="hearing-details">
-                  <span><Briefcase size={14} /> {hearing.case?.caseNumber}</span>
-                  <span><User size={14} /> {hearing.client?.name}</span>
-                  <span><Clock size={14} /> {hearing.hearingTime}</span>
-                  <span><MapPin size={14} /> {hearing.courtName}</span>
+            <div key={hearing._id} className="hearing-card-wrapper">
+              <div className="hearing-card">
+                <div className="hearing-date">
+                  <span className="day">{new Date(hearing.hearingDate).getDate()}</span>
+                  <span className="month">{new Date(hearing.hearingDate).toLocaleString('default', { month: 'short' })}</span>
+                </div>
+                <div className="hearing-content">
+                  <h3>{hearing.purpose}</h3>
+                  <div className="hearing-details">
+                    <span><Briefcase size={14} /> {hearing.case?.caseNumber}</span>
+                    <span><User size={14} /> {hearing.client?.name}</span>
+                    <span><Clock size={14} /> {hearing.hearingTime}</span>
+                    <span><MapPin size={14} /> {hearing.courtName}</span>
+                  </div>
+                </div>
+                <div className="hearing-status">
+                  <span className={`status-badge ${hearing.status}`}>{hearing.status}</span>
                 </div>
               </div>
-              <div className="hearing-status">
-                <span className={`status-badge ${hearing.status}`}>{hearing.status}</span>
-              </div>
+              <button 
+                className="btn-delete-hearing"
+                onClick={(e) => handleDeleteHearing(hearing._id, hearing.purpose, e)}
+                title="Delete Hearing"
+              >
+                <Trash2 size={18} />
+              </button>
             </div>
           ))}
         </div>
